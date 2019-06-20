@@ -1,0 +1,45 @@
+<html>
+<head>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+{% include "header.html" %}
+
+<h2>&nbsp;&nbsp;New Item</h2>
+{%if 'username' not in session %}
+    <h2>You a required to be logged in to create a new item.
+    Use link in upper right to login, or <a href="{{url_for('showCategories')}}">Return</a>
+    </h2>
+{% else %}
+<div>
+    <div class='column2'>    
+        <form action="#" method = 'post'>
+        <dl>
+            <dt>Name:</dt>
+                <dd><input type ='text' size='30' name='name'></dd>
+            <dt>Description:</dt>
+                <dd><textarea name = 'description' rows='5' cols='40'></textarea></dd>
+            <dt>Category:</dt>
+                <dd>
+                <select name="category">
+                    <option value="1">Soccer</option>
+                    <option value="2">Baseketball</option>
+                    <option value="3">Baseball</option>
+                    <option value="4">Frisbee</option>
+                    <option value="5">Snowboarding</option>
+                    <option value="6">Foosball</option>
+                    <option value="7">Hockey</option>
+                    <option value="8">Hiking</option>
+                </select>
+                </dd>
+        </dl>
+
+        <input type='submit' value='Add'>
+
+        <a href = '/'> Cancel </a>
+        </form>
+    </div>
+</div> 
+{% endif%}    
+</html>

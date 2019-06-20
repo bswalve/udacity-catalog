@@ -1,0 +1,38 @@
+<html>
+<head>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type=text/css href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    {% include "header.html" %}
+    <div class = 'flash'>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li> <strong> {{ message }} </strong> </li>
+            {% endfor %}
+            </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+    <div class='column2'>
+        <h2>Categories</h2>
+        {% for i in categories %}
+            <a href='/catalog/{{i.id}}/items'>{{i.name}}</a></br>
+        {% endfor %}
+    </div>
+    <div class='column2'>
+        <h2>{{category.name}} Items ({{itemcount}} items)</h2>
+        {% for i in items %}
+            <a href='/catalog/{{i.id}}'>{{i.name}}</a></br>
+        {% endfor %}
+        {% if 'username' in session %}
+        <a href='/catalog/item/new'>Add Item</a>
+        {% endif %} 
+    </div>
+    
+
+</body>
+
+</html>

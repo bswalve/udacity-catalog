@@ -1,0 +1,35 @@
+<html>
+<head>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+{% include "header.html" %}
+<div class = 'flash'>
+	{% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li> <strong> {{ message }} </strong> </li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</div>
+
+<div>
+    <div class='column2'> 
+        <h2>Delete Item</h2>
+        {% if 'username' in session and item.user_id == user_id%}
+            <form action="{{ url_for('deleteItem', item_id=item.id)}}" method = 'post'>
+            <h2>Are you sure you want to delete item: {{item.name}}</h2>
+            <input type='submit' value='Delete'> | <a href='/catalog/{{item.id}}'>Return</a>
+            </form>
+        {% else %}
+            <h2>Either you are not logged in, or you did not create this item. <a href='/catalog'>Return Home</a></h2>
+        {% endif %}
+    </div>
+</div>        
+</body>
+
+</html>

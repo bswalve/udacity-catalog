@@ -1,0 +1,41 @@
+<html>
+<head>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+{% include "header.html" %}
+<h2> Edit Item </h2>
+
+{% if 'username' in session and item.user_id == user_id%}
+<div>
+    <div class='column2'>
+        <form action="#" method = 'post'>
+            <dl>
+                <dt>Name:</dt>
+                    <dd><input type ='text' size='30' name='name' value = '{{item.name }}'></dd>
+                <dt>Description:</dt>
+                    <dd><textarea name = 'description' rows='5' cols='40'>{{item.description }}</textarea></dd>
+                <dt>Category:</dt>
+                    <dd>
+                    <select name="category">
+                    {% for i in categories %}
+                        {% if i.id == item.category_id %}
+                            <option value = "{{i.id}}" selected = "selected">{{i.name}}</option>
+                        {% else %}
+                            <option value = "{{i.id}}">{{i.name}}</option>
+                        {% endif %}
+                    {% endfor %}
+                    </select>
+                    </dd>
+            </dl>
+            <input type='submit' value='Update'>
+            <a href = '/'> Cancel </a>
+        </form>
+    </div>
+</div>    
+{% else %}
+    <h2>Either you are not logged in, or you did not create this item. <a href='/catalog'>Return Home</a>
+{% endif %}
+</body>
+</html>
